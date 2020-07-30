@@ -1,14 +1,13 @@
 import React from 'react';
-import 'semantic-ui-css/semantic.min.css';
-import './Title.css'
+import { Header } from 'semantic-ui-react';
 
 function Title() {
   return (
     <div className="Title">
-      <header className="Title-header">
-        <h1>OI Calendar</h1>
-      </header>
-    </div>
+      <Header as='h1' textAlign='center'>
+        OI Calendar
+      </Header>
+    </div >
   );
 }
 
