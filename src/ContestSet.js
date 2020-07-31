@@ -29,8 +29,9 @@ class ContestSet extends React.Component {
       <Table.Row>
         <Table.Cell>{el.oj}</Table.Cell>
         <Table.Cell>{el.name}</Table.Cell>
-        <Table.Cell>{moment(el.startTime).format('YYYY 年 MM 月 DD 日 HH:mm')}</Table.Cell>
-        <Table.Cell>{moment(el.endTime).format('YYYY 年 MM 月 DD 日 HH:mm')}</Table.Cell>
+        <Table.Cell>{moment(el.startTime).format('MM 月 DD 日 HH:mm')}</Table.Cell>
+        <Table.Cell>{moment(el.endTime).format('MM 月 DD 日 HH:mm')}</Table.Cell>
+        <Table.Cell>{`${moment(el.endTime).diff(el.startTime, 'm')} 分钟`}</Table.Cell>
       </Table.Row>
     ));
 
@@ -42,6 +43,7 @@ class ContestSet extends React.Component {
             <Table.HeaderCell>Contest Name</Table.HeaderCell>
             <Table.HeaderCell>Start Time</Table.HeaderCell>
             <Table.HeaderCell>End Time</Table.HeaderCell>
+            <Table.HeaderCell>Last Time</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
   
