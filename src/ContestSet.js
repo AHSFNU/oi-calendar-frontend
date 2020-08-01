@@ -11,30 +11,16 @@ class ContestSet extends React.Component {
   }
 
   async componentDidMount() {
-    const resp = await fetch('http://hikari.camber.moe:10086/');
+    const resp = await fetch('http://127.0.0.1:8080/');
     const result = await resp.json();
     if (result.status === 'OK') {
-      this.setState({
-        contests: result.contests
-      });
+      this.setState({ contests: result.contests });
     } else {
       // TODO: deal with errors
     }
   }
 
   render() {
-    let { contests } = this.state;
-
-    let tableBody = contests.map(el => (
-      <Table.Row>
-        <Table.Cell>{el.oj}</Table.Cell>
-        <Table.Cell>{el.name}</Table.Cell>
-        <Table.Cell>{moment(el.startTime).format('MM 月 DD 日 HH:mm')}</Table.Cell>
-        <Table.Cell>{moment(el.endTime).format('MM 月 DD 日 HH:mm')}</Table.Cell>
-        <Table.Cell>{`${moment(el.endTime).diff(el.startTime, 'm')} 分钟`}</Table.Cell>
-      </Table.Row>
-    ));
-
     return (
       <Table basic='very'>
         <Table.Header>
@@ -46,9 +32,17 @@ class ContestSet extends React.Component {
             <Table.HeaderCell>Last Time</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
-  
+
         <Table.Body>
-          {tableBody}
+          {this.state.contests.map(el => (
+            <Table.Row>
+              <Table.Cell>{el.oj}</Table.Cell>
+              <Table.Cell><a href={el.url}>{el.name}</a></Table.Cell>
+              <Table.Cell>{moment(el.startTime).format('MM 月 DD 日 HH:mm')}</Table.Cell>
+              <Table.Cell>{moment(el.endTime).format('MM 月 DD 日 HH:mm')}</Table.Cell>
+              <Table.Cell>{`${moment(el.endTime).diff(el.startTime, 'm')} 分钟`}</Table.Cell>
+            </Table.Row>
+          ))}
         </Table.Body>
       </Table>
     );
