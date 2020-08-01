@@ -2,6 +2,8 @@ import React from 'react';
 import { Table } from 'semantic-ui-react';
 const moment = require('moment');
 
+const apiUrl = require('./config.json').apiUrl;
+
 class ContestSet extends React.Component {
   constructor(props) {
     super(props);
@@ -11,7 +13,7 @@ class ContestSet extends React.Component {
   }
 
   async componentDidMount() {
-    const resp = await fetch('http://127.0.0.1:8080/');
+    const resp = await fetch(apiUrl);
     const result = await resp.json();
     if (result.status === 'OK') {
       this.setState({ contests: result.contests });
