@@ -22,6 +22,11 @@ class ContestSet extends React.Component {
     }
   }
 
+  parseMinutes(minutes) {
+    const hours = parseInt(minutes / 60);
+    return minutes % 60 === 0 ? `${hours} 小时` : `${hours} 小时 ${minutes - hours * 60} 分钟`;
+  }
+
   render() {
     return (
       <Table basic='very'>
@@ -42,7 +47,7 @@ class ContestSet extends React.Component {
               <Table.Cell><a href={el.url}>{el.name}</a></Table.Cell>
               <Table.Cell>{moment(el.startTime).format('MM 月 DD 日 HH:mm')}</Table.Cell>
               <Table.Cell>{moment(el.endTime).format('MM 月 DD 日 HH:mm')}</Table.Cell>
-              <Table.Cell>{`${moment(el.endTime).diff(el.startTime, 'm')} 分钟`}</Table.Cell>
+              <Table.Cell>{this.parseMinutes(moment(el.endTime).diff(el.startTime, 'm'))}</Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
