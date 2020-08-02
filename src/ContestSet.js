@@ -23,8 +23,16 @@ class ContestSet extends React.Component {
   }
 
   parseMinutes(minutes) {
-    const hours = parseInt(minutes / 60);
-    return minutes % 60 === 0 ? `${hours} 小时` : `${hours} 小时 ${minutes - hours * 60} 分钟`;
+    if (minutes === 0) {
+      return '';
+    } if (minutes < 60 * 24) {
+      const hours = parseInt(minutes / 60);
+      return minutes % 60 === 0 ? `${hours} 小时` : `${hours} 小时 ${minutes - hours * 60} 分钟`;
+    } else {
+      const days = parseInt(minutes / 60 / 24);
+      const withoutDays = this.parseMinutes(minutes % (60 * 24));
+      return withoutDays === '' ? `${days} 天` : `${days} 天 ${withoutDays}`;
+    }
   }
 
   render() {
