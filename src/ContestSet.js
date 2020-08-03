@@ -7,15 +7,11 @@ const apiUrl = require('./config.json').apiUrl;
 class ContestSet extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      contests: []
-    };
+    this.state = {};
   }
 
   async componentDidMount() {
-    const resp = await fetch(apiUrl);
-    const result = await resp.json();
-    this.setState({ status: result.status, contests: result.contests });
+    this.setState(await (await fetch(apiUrl)).json());
   }
 
   parseMinutes(minutes) {
