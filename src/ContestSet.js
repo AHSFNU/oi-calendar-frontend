@@ -65,7 +65,7 @@ class ContestSet extends React.Component {
       days && `${days} 天`,
       hours && `${hours} 小时`,
       minutes && `${minutes} 分钟`
-    ].fliter(str => !!str).join(' ');
+    ].filter(str => !!str).join(' ');
   }
 
   render() {
